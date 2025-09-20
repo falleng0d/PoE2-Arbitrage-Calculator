@@ -1,0 +1,56 @@
+### GET Categories
+GET https://poe2scout.com/api/items/categories
+
+### GET Leagues
+GET https://poe2scout.com/api/leagues
+
+### GET Filters
+GET https://poe2scout.com/api/items/filters
+
+### GET Ritual
+GET https://poe2scout.com/api/items/currency/ritual?page=1&perPage=100&league=Rise%20of%20the%20Abyssal&search=&referenceCurrency=exalted
+
+### GET Currency
+GET https://poe2scout.com/api/items/currency/currency?page=1&perPage=100&league=Rise%20of%20the%20Abyssal&search=&referenceCurrency=exalted
+
+### GET Fragments
+GET https://poe2scout.com/api/items/currency/fragments?page=1&perPage=100&league=Rise%20of%20the%20Abyssal&search=&referenceCurrency=exalted
+
+### GET Runes
+GET https://poe2scout.com/api/items/currency/runes?page=1&perPage=100&league=Rise%20of%20the%20Abyssal&search=&referenceCurrency=exalted
+
+### GET Talismans
+GET https://poe2scout.com/api/items/currency/talismans?page=1&perPage=100&league=Rise%20of%20the%20Abyssal&search=&referenceCurrency=exalted
+
+### GET Essences
+GET https://poe2scout.com/api/items/currency/essences?page=1&perPage=100&league=Rise%20of%20the%20Abyssal&search=&referenceCurrency=exalted
+
+### GET Ultimatum
+GET https://poe2scout.com/api/items/currency/ultimatum?page=1&perPage=100&league=Rise%20of%20the%20Abyssal&search=&referenceCurrency=exalted
+
+### GET Expedition
+GET https://poe2scout.com/api/items/currency/expedition?page=1&perPage=100&league=Rise%20of%20the%20Abyssal&search=&referenceCurrency=exalted
+
+### GET Ritual
+GET https://poe2scout.com/api/items/currency/ritual?page=1&perPage=100&league=Rise%20of%20the%20Abyssal&search=&referenceCurrency=exalted
+
+### GET Vaultkeys
+GET https://poe2scout.com/api/items/currency/vaultkeys?page=1&perPage=100&league=Rise%20of%20the%20Abyssal&search=&referenceCurrency=exalted
+
+### GET Breach
+GET https://poe2scout.com/api/items/currency/breach?page=1&perPage=100&league=Rise%20of%20the%20Abyssal&search=&referenceCurrency=exalted
+
+### GET Abyss
+GET https://poe2scout.com/api/items/currency/abyss?page=1&perPage=100&league=Rise%20of%20the%20Abyssal&search=&referenceCurrency=exalted
+
+### GET Uncutgems
+GET https://poe2scout.com/api/items/currency/uncutgems?page=1&perPage=100&league=Rise%20of%20the%20Abyssal&search=&referenceCurrency=exalted
+
+### GET Lineage Support Gems
+GET https://poe2scout.com/api/items/currency/lineagesupportgems?page=1&perPage=100&league=Rise%20of%20the%20Abyssal&search=&referenceCurrency=exalted
+
+### GET Delirium
+GET https://poe2scout.com/api/items/currency/delirium?page=1&perPage=100&league=Rise%20of%20the%20Abyssal&search=&referenceCurrency=exalted
+
+### GET Delirium
+GET https://poe2scout.com/api/items/currency/delirium?page=1&perPage=100&league=Rise%20of%20the%20Abyssal&search=&referenceCurrency=exalted
