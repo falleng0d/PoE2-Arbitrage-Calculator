@@ -10,8 +10,13 @@ arbitrage-calc/
 ├── src/
 │   ├── components/            # React components
 │   │   ├── app/              # Application-specific components
+│   │   │   ├── BaseCurrencyFilterSelect.tsx
 │   │   │   ├── IconDisplay.tsx
 │   │   │   ├── IconPicker.tsx
+│   │   │   ├── PrecisionInput.tsx
+│   │   │   ├── RiskFilterSelect.tsx
+│   │   │   ├── SearchInput.tsx
+│   │   │   ├── SortBySelect.tsx
 │   │   │   └── iconConstants.ts
 │   │   ├── ui/               # Reusable UI components (shadcn/ui)
 │   │   ├── ArbitrageDashboard.tsx
@@ -19,18 +24,26 @@ arbitrage-calc/
 │   │   ├── Navigation.tsx
 │   │   └── RateConfiguration.tsx
 │   ├── hooks/                # Custom React hooks
+│   │   └── use-toast.ts      # Toast notification hook
 │   ├── lib/                  # Utility libraries
+│   │   └── utils.ts          # Common utility functions
 │   ├── types/                # TypeScript type definitions
+│   │   └── index.ts          # Core type definitions
 │   ├── utils/                # Utility functions and helpers
 │   │   ├── arbitrage.ts      # Core arbitrage calculation logic
+│   │   ├── arbitrage.test.ts # Comprehensive test suite
 │   │   └── storage.ts        # Local storage management
 │   ├── App.tsx               # Main application component
 │   ├── main.tsx              # Application entry point
 │   └── index.css             # Global styles
 ├── components.json           # shadcn/ui configuration
+├── eslint.config.js          # ESLint configuration
 ├── package.json              # Dependencies and scripts
+├── postcss.config.js         # PostCSS configuration
 ├── tailwind.config.js        # Tailwind CSS configuration
 ├── tsconfig.json             # TypeScript configuration
+├── tsconfig.app.json         # TypeScript app configuration
+├── tsconfig.node.json        # TypeScript Node configuration
 └── vite.config.ts            # Vite build configuration
 ```
 
@@ -56,6 +69,8 @@ arbitrage-calc/
 ### Development Tools
 - **ESLint** - Code linting and style enforcement
 - **Vitest** - Unit testing framework
+- **PostCSS** - CSS processing and optimization
+- **TypeScript Project References** - Modular TypeScript configuration
 
 ## ✨ Main Features
 
@@ -76,11 +91,13 @@ arbitrage-calc/
 
 ### 📊 Arbitrage Dashboard
 - **Opportunity Detection**: Automatically identify profitable 3-way arbitrage opportunities
-- **Smart Filtering**: Filter opportunities by:
+- **Advanced Filtering**: Filter opportunities by:
   - Currency search (find opportunities involving specific currencies)
+  - Base currency selection (filter by starting currency)
   - Risk level (low, medium, high)
   - Profit thresholds
   - Confidence scores
+- **Precision Controls**: Adjustable precision settings for quantity calculations
 - **Sorting Options**: Sort opportunities by profit, risk, or confidence
 - **Detailed Analysis**: View complete trading paths with:
   - Step-by-step conversion quantities
@@ -114,6 +131,30 @@ arbitrage-calc/
 - **Cycle Detection**: Identifies profitable circular trading paths
 - **Confidence Scoring**: Algorithmic confidence assessment based on market conditions
 - **Performance Optimization**: Memoized calculations for smooth user experience
+- **Comprehensive Testing**: Full test suite with unit tests for arbitrage calculations
+- **Modular Architecture**: Well-organized component structure with reusable UI elements
+
+## 🏗️ Component Architecture
+
+The application follows a modular component architecture with clear separation of concerns:
+
+### Main Components
+- **ArbitrageDashboard**: Main dashboard displaying opportunities with filtering and sorting
+- **CurrencyManagement**: Interface for adding, editing, and deleting currencies
+- **RateConfiguration**: Tool for setting up conversion rates between currencies
+- **Navigation**: Application navigation with routing support
+
+### App-Specific Components (`src/components/app/`)
+- **BaseCurrencyFilterSelect**: Filter opportunities by base currency
+- **IconDisplay**: Display currency icons with fallback support
+- **IconPicker**: Interactive icon selection interface
+- **PrecisionInput**: Adjustable precision controls for calculations
+- **RiskFilterSelect**: Filter opportunities by risk level
+- **SearchInput**: Search functionality for filtering
+- **SortBySelect**: Sorting options for opportunity lists
+
+### UI Components (`src/components/ui/`)
+Built on shadcn/ui and Radix UI primitives, providing consistent and accessible interface elements.
 
 ## 🚀 Getting Started
 
@@ -134,7 +175,9 @@ arbitrage-calc/
 
 4. **Run Tests**
    ```bash
-   npm run test
+   npm run test        # Run tests in watch mode
+   npm run test:run    # Run tests once
+   npm run test:ui     # Run tests with UI interface
    ```
 
 ## 📈 How It Works
