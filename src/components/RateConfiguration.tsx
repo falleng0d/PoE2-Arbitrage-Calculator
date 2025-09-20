@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { ChangeEventHandler, useEffect, useState } from 'react';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -22,6 +22,72 @@ interface RateInput {
   toQuantity: string;
   rate: string;
   isValid: boolean;
+}
+
+function ToFromRateCard(props: {
+  toCurrency: Currency,
+  fromCurrency: Currency,
+  rateInput: RateInput | undefined,
+  onChangeToQuantity: ChangeEventHandler<HTMLInputElement>,
+  onChangeFromQuantity: ChangeEventHandler<HTMLInputElement>
+}) {
+  return <div className="space-y-3 p-4 border rounded-lg">
+    <Label className="flex items-center space-x-2 font-medium">
+      <IconDisplay iconName={props.toCurrency.icon} className="h-6 w-6"/>
+      <span>{props.toCurrency.name}</span>
+    </Label>
+
+    <div className="grid grid-cols-2 gap-3">
+
+      <div className="space-y-1">
+        <Label htmlFor={`${props.fromCurrency.id}-${props.toCurrency.id}-to`}
+          className="text-sm text-muted-foreground"> To ({props.toCurrency.name}) </Label>
+        <Input
+          id={`${props.fromCurrency.id}-${props.toCurrency.id}-to`}
+          type="number"
+          step="any"
+          min="0"
+          value={props.rateInput?.toQuantity || ""}
+          onChange={props.onChangeToQuantity}
+          className={
+            `${props.rateInput?.toQuantity && !props.rateInput.isValid
+              ? "border-destructive focus:border-destructive"
+              : ""}`
+          }
+        />
+      </div>
+
+      <div className="space-y-1">
+        <Label htmlFor={`${props.fromCurrency.id}-${props.toCurrency.id}-from`}
+          className="text-sm text-muted-foreground"> From
+          ({props.fromCurrency.name}) </Label> <Input
+        id={`${props.fromCurrency.id}-${props.toCurrency.id}-from`}
+        type="number"
+        step="any"
+        min="0"
+        value={props.rateInput?.fromQuantity || ""}
+        onChange={props.onChangeFromQuantity}
+        className={
+          `${props.rateInput?.fromQuantity && !props.rateInput.isValid
+            ? "border-destructive focus:border-destructive"
+            : ""}`
+        }
+      />
+      </div>
+    </div>
+
+    {props.rateInput?.rate && props.rateInput.isValid && (
+      <div className="text-sm text-muted-foreground">
+        Rate: {parseFloat(props.rateInput.rate).toFixed(6)}
+      </div>
+    )}
+
+    {(props.rateInput?.fromQuantity || props.rateInput?.toQuantity) && !props.rateInput.isValid && (
+      <p className="text-sm text-destructive">
+        Please enter valid positive numbers for both quantities
+      </p>
+    )}
+  </div>;
 }
 
 export const RateConfiguration = ({
@@ -219,65 +285,22 @@ export const RateConfiguration = ({
                     );
                     
                     return (
-                      <div key={toCurrency.id} className="space-y-3 p-4 border rounded-lg">
-                        <Label className="flex items-center space-x-2 font-medium">
-                          <IconDisplay iconName={toCurrency.icon} className="h-6 w-6" />
-                          <span>To {toCurrency.name}</span>
-                        </Label>
-
-                        <div className="grid grid-cols-2 gap-3">
-
-                          <div className="space-y-1">
-                            <Label htmlFor={`${fromCurrency.id}-${toCurrency.id}-to`} className="text-sm text-muted-foreground">
-                              To ({toCurrency.name})
-                            </Label>
-                            <Input
-                              id={`${fromCurrency.id}-${toCurrency.id}-to`}
-                              type="number"
-                              step="any"
-                              min="0"
-                              value={rateInput?.toQuantity || ''}
-                              onChange={(e) => handleQuantityChange(fromCurrency.id, toCurrency.id, 'toQuantity', e.target.value)}
-                              className={
-                                `${rateInput?.toQuantity && !rateInput.isValid
-                                  ? 'border-destructive focus:border-destructive'
-                                  : ''}`
-                              }
-                            />
-                          </div>
-
-                          <div className="space-y-1">
-                            <Label htmlFor={`${fromCurrency.id}-${toCurrency.id}-from`} className="text-sm text-muted-foreground">
-                              From ({fromCurrency.name})
-                            </Label>
-                            <Input
-                              id={`${fromCurrency.id}-${toCurrency.id}-from`}
-                              type="number"
-                              step="any"
-                              min="0"
-                              value={rateInput?.fromQuantity || ''}
-                              onChange={(e) => handleQuantityChange(fromCurrency.id, toCurrency.id, 'fromQuantity', e.target.value)}
-                              className={
-                                `${rateInput?.fromQuantity && !rateInput.isValid
-                                  ? 'border-destructive focus:border-destructive'
-                                  : ''}`
-                              }
-                            />
-                          </div>
-                        </div>
-
-                        {rateInput?.rate && rateInput.isValid && (
-                          <div className="text-sm text-muted-foreground">
-                            Rate: {parseFloat(rateInput.rate).toFixed(6)}
-                          </div>
+                      <ToFromRateCard key={toCurrency.id}
+                        toCurrency={toCurrency}
+                        fromCurrency={fromCurrency}
+                        rateInput={rateInput}
+                        onChangeToQuantity={(e) => handleQuantityChange(
+                          fromCurrency.id,
+                          toCurrency.id,
+                          'toQuantity',
+                          e.target.value
                         )}
-
-                        {(rateInput?.fromQuantity || rateInput?.toQuantity) && !rateInput.isValid && (
-                          <p className="text-sm text-destructive">
-                            Please enter valid positive numbers for both quantities
-                          </p>
-                        )}
-                      </div>
+                        onChangeFromQuantity={(e) => handleQuantityChange(
+                          fromCurrency.id,
+                          toCurrency.id,
+                          'fromQuantity',
+                          e.target.value
+                        )}/>
                     );
                   })}
               </div>
